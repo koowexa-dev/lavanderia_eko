@@ -204,13 +204,6 @@
         "Plan BASICO: Prelavado + lavado liquido + suavizante",
         "Plan PREMIUM: Capsula de alta eficiencia + fragancia especial",
         "Plan ESPECIAL: Ideal para ropa de cama y toallas, aroma premium",
-        "Recogida y entrega a domicilio en 48 horas",
-        "Detergentes ecologicos: Prodoxa, Tide, Downy para piel sensible",
-        "Servicio de planchado disponible",
-        "Lavado eco-friendly, cuidamos el medio ambiente",
-        "Cubrimos zonas: Habana Vieja, Centro Habana, Vedado, Playa y mas",
-        "Pregunta por nuestras promociones al realizar multiples servicios",
-        "Confianza y calidad: mas de 1000 clientes satisfechos",
         "Reserva facil desde nuestra web o por WhatsApp"
     ];
 
@@ -603,9 +596,6 @@
             });
         });
 
-        if (accordionItems.length > 0) {
-            accordionItems[0].classList.add('active');
-        }
     }
 
     if (document.readyState === 'loading') {

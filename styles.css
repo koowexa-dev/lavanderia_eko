@@ -215,7 +215,7 @@ header {
 
 .bg-basico { background: var(--azul-lavanderia); }
 .bg-premium { background: var(--verde-eko); }
-.bg-especial { background: #8B5A2B; }
+.bg-especial { background: #4A148C; }  /* Cambiado de #8B5A2B a morado oscuro */
 .bg-normal { background: var(--azul-claro-agua); }
 
 .price-header h3 {

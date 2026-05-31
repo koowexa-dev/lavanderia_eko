@@ -237,8 +237,10 @@ function renderizarFormulario() {
                  </div>
              </div>
              <div class="form-group"><label>Selecciona rangos de peso</label>
+                 <small style="display:block; font-size:0.7rem; color:#666;">* Elegir esta opción es opcional. El peso de la ropa se evaluará en el local.</small>
                  <div id="rangosBotonesContainer" class="rangos-container"></div>
-                 <div id="pesosSeleccionadosLista" class="pesos-lista"></div>             </div>
+                 <div id="pesosSeleccionadosLista" class="pesos-lista"></div>
+             </div>
          </div>
          <div id="tab-extras" class="tab-content" style="display:none;">
              <h4>Aromas</h4>
