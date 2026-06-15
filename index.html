@@ -374,6 +374,32 @@
             font-size: 1.2rem;
         }
 
+        /* BOTÓN SOLICITAR AHORA (estilo plano, sin animaciones) */
+        .btn-solicitar {
+            display: block;
+            text-align: center;
+            background-color: var(--verde-eko);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 12px 16px;
+            border-radius: 60px;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            margin-top: 8px;
+            font-family: var(--font-family);
+        }
+
+        .btn-solicitar:hover {
+            background-color: var(--verde-eko);
+            /* sin cambios visuales, sin hover effects */
+        }
+
         /* VALORES - TARJETAS ESTATICAS ACTUALIZADAS EKKO */
         .values-grid {
             display: grid;
@@ -719,6 +745,7 @@
             .plan-header { padding: 20px 20px 8px 20px; }
             .plan-body { padding: 0 20px 20px 20px; }
             .values-grid { grid-template-columns: 1fr; }
+            .btn-solicitar { font-size: 0.9rem; padding: 10px 12px; }
         }
 
         @media (max-width: 480px) {
@@ -792,7 +819,7 @@
             </div>
         </div>
 
-        <!-- PLANES DE SERVICIO (ELIMINADO EL PLAN NORMAL/BÁSICO) -->
+        <!-- PLANES DE SERVICIO (CON BOTÓN SOLICITAR AHORA) -->
         <div class="container" id="planes">
             <div class="section-title"><h2>Planes Del Servicio</h2><p>Elige el plan ideal para tus prendas</p></div>
             <div class="pricing-grid" id="pricingGrid"></div>
@@ -863,33 +890,38 @@
 
     <script>
         (function() {
-            // PLANES ACTUALIZADOS: solo PREMIUM, ESPECIAL, BABY EKKO 1 y BABY EKKO 2.
             const planesData = [
                 { 
+                    id: "BASICO", nombre: "BASICO", descripcion: "lavado + secado + doblado", 
+                    detergente: "Detergente líquido + suavizante Aromatizado", proceso: "simple",
+                    incluye: "buena limpieza y resultado", precios: {"1-2 kg":600,"3-4 kg":800,"5-6 kg":1000,"7 kg":1200}, 
+                    badge: "Popular", propuesta: "lo necesario para cuidar tus prendas"
+                },
+                { 
                     id: "PREMIUM", nombre: "PREMIUM", descripcion: "Prelavado + Lavado + Secado + Doblado", 
-                    detergente: "Cápsula + fragancia especial o perfume", proceso: "Cápsulas multiacción, protección de colores y fragancia duradera.",
+                    detergente: "Cápsula + fragancia especial o perfume", proceso: "cuidadoso y preservador",
                     incluye: "Maximo cuidado y preservación para tu ropa", precios: {"1-2 kg":800,"3-4 kg":1000,"5-6 kg":1200,"7 kg":1400}, 
-                    badge: "Recomendado", propuesta: "✨ Experiencia premium: aroma por días, acabados impecables."
+                    badge: "Recomendado", propuesta: "Experiencia premium: aroma por días, acabados impecables."
                 },
                 { 
                     id: "ESPECIAL", nombre: "ESPECIAL", descripcion: "Ropa de cama + Toallas + aroma premium", 
-                    detergente: "Cápsula intensiva + fragancia", proceso: "Ciclo intensivo para tejidos gruesos, eliminación de ácaros y bacterias.",
+                    detergente: "Cápsula intensiva + fragancia", proceso: "intenso y cuidadoso",
                     incluye: "Tratado único y exclusivo para todas tus prendas", precios: {"1-2 kg":900,"3-4 kg":1100,"5-6 kg":1300,"7 kg":1500}, 
-                    badge: "Trato Unico", propuesta: "🏡 Cuidado especial para hogar: frescura y suavidad garantizadas."
+                    badge: "Trato Unico", propuesta: "Cuidado especial para hogar: frescura y suavidad garantizadas."
                 },
                 // BABY EKKO BÁSICO
                 { 
                     id: "BABY_BASIC", nombre: "BABY EKKO 1", descripcion: "Lavado Especializado para Ropa de Bebé", 
-                    detergente: "Detergente neutro hipoalergénico", proceso: "Lavado especializado con enjuague profundo, secado a baja temperatura.",
+                    detergente: "Detergente neutro hipoalergénico", proceso: "cuidadoso",
                     incluye: "Doblado básico, cuidado para pieles sensibles", precios: {"Hasta 5 kg":1500}, 
-                    badge: "Basico", propuesta: "👶 Ideal para tu bebé: sin químicos agresivos, aroma delicado y suavidad extrema."
+                    badge: "Basico", propuesta: "Ideal para tu bebé: sin químicos agresivos, aroma delicado y suavidad extrema."
                 },
                 // BABY EKKO PREMIUM
                 { 
                     id: "BABY_PREMIUM", nombre: "BABY EKKO 2", descripcion: "Lavado Especializado + Recogida y Entrega a Domicilio", 
-                    detergente: "Detergente neutro hipoalergénico + antimanchas suave", proceso: "Lavado especializado, tratamiento antimanchas básico, secado suave.",
+                    detergente: "Detergente neutro hipoalergénico + antimanchas suave", proceso: "máxima delicadeza y cuidado",
                     incluye: "Recogida a domicilio, doblado profesional, empaque higiénico, entrega a domicilio", precios: {"Hasta 5 kg":2000}, 
-                    badge: "Premium", propuesta: "👑 Servicio completo: máxima comodidad y cuidado premium para la ropa de tu bebé."
+                    badge: "Premium", propuesta: "Servicio completo: máxima comodidad y cuidado premium para la ropa de tu bebé."
                 }
             ];
 
@@ -916,7 +948,15 @@
                 { src: "promo6.jpg", alt: "Promo 6" },
             ];
 
-            // Renderizar planes
+            // Función para scroll suave hacia la sección app
+            function scrollToApp() {
+                const appSection = document.getElementById('app');
+                if(appSection) {
+                    appSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            // Renderizar planes con botón "Solicitar ahora"
             const pricingGrid = document.getElementById('pricingGrid');
             if(pricingGrid){
                 pricingGrid.innerHTML = '';
@@ -928,6 +968,7 @@
                     for(const [rango, precio] of Object.entries(plan.precios)) {
                         listaPrecios += `<li><span>${rango}</span><span>$${precio} CUP</span></li>`;
                     }
+                    // Se agrega el botón "Solicitar ahora" que al hacer clic ejecuta scrollToApp
                     card.innerHTML = `
                         <div class="plan-badge">${plan.badge}</div>
                         <div class="plan-header">
@@ -950,8 +991,17 @@
                             <div class="propuesta">
                                 <span>💡</span> <span>${plan.propuesta}</span>
                             </div>
+                            <button class="btn-solicitar">📲 Solicitar ahora</button>
                         </div>
                     `;
+                    // Asignar evento click al botón recién creado
+                    const btn = card.querySelector('.btn-solicitar');
+                    if(btn) {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            scrollToApp();
+                        });
+                    }
                     pricingGrid.appendChild(card);
                 });
             }
