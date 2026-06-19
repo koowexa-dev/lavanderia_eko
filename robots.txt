@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://koowexa-dev.github.io/lavanderia_ekko_website/sitemap.xml
